@@ -1,7 +1,6 @@
 package regexit.notification;
 
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import regexit.clients.fraud.NotificationRequest;
@@ -15,7 +14,7 @@ public class NotificationService {
 
     private final NotificationRepository notificationRepository;
 
-    public void sendNotification(NotificationRequest notificationRequest) {
+    public void send(NotificationRequest notificationRequest) {
         notificationRepository.save(
                 Notification.builder()
                         .toCustomerId(notificationRequest.customerId())

@@ -3,9 +3,9 @@ package regexit.customer;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import regexit.amqp.RabbitMqMessageProducer;
 import regexit.clients.fraud.FraudCheckResponse;
 import regexit.clients.fraud.FraudClient;
-import regexit.clients.fraud.NotificationClient;
 import regexit.clients.fraud.NotificationRequest;
 
 @Service
@@ -18,7 +18,7 @@ public class CustomerService {
 
     private final FraudClient fraudClient;
 
-    private final NotificationClient notificationClient;
+    private final RabbitMqMessageProducer rabbitMQMessageProducer;
 
     public void registerCustomer(CustomerRegistrationRequest request) {
         Customer customer = Customer.builder()
@@ -39,12 +39,16 @@ public class CustomerService {
         }
 
         //todo: send notification
-        notificationClient.sendNotification(
-                new NotificationRequest(
-                        customer.getId(),
-                        customer.getEmail(),
-                        String.format("Hi %s wlecome to regexit services", customer.getFirstname())
-                )
+        NotificationRequest notificationRequest = new NotificationRequest(
+                customer.getId(),
+                customer.getEmail(),
+                String.format("Hi %s wlecome to regexit services", customer.getFirstname())
+        );
+
+        rabbitMQMessageProducer.publish(
+                notificationRequest,
+                "internal.exchange",
+                "internal.notification.routing-key"
         );
     }
 }
