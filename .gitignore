@@ -1,7 +1,7 @@
 HELP.md
 .gradle
 build/
-#**/src/test/**/target/*
+**/src/main/**/target/*
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
@@ -20,6 +20,7 @@ build/
 bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
+**/target/**
 
 ### IntelliJ IDEA ###
 .idea
