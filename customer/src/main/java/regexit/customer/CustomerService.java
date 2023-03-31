@@ -6,7 +6,7 @@ import org.springframework.web.client.RestTemplate;
 import regexit.amqp.RabbitMqMessageProducer;
 import regexit.clients.fraud.FraudCheckResponse;
 import regexit.clients.fraud.FraudClient;
-import regexit.clients.fraud.NotificationRequest;
+import regexit.clients.notification.NotificationRequest;
 
 @Service
 @AllArgsConstructor

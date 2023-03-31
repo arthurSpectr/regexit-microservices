@@ -1,4 +1,4 @@
-package regexit.clients.fraud;
+package regexit.clients.notification;
 
 public record NotificationRequest(Integer customerId, String customerEmail, String message) {
 }

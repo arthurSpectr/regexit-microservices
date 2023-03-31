@@ -40,29 +40,29 @@ services:
       - "15672:15672"
     networks:
       - spring
-  eureka-server:
-    image: arthurspectr/eureka-server
-    container_name: eureka-server
-    ports:
-      - "8761:8761"
-    environment:
-      - SPRING_PROFILES_ACTIVE=docker
-    networks:
-      - spring
-    depends_on:
-      - zipkin
-  apigw:
-    image: arthurspectr/api-gateway
-    container_name: apigw
-    ports:
-      - "8083:8083"
-    environment:
-      - SPRING_PROFILES_ACTIVE=docker
-    networks:
-      - spring
-    depends_on:
-      - zipkin
-      - eureka-server
+#  eureka-server:
+#    image: arthurspectr/eureka-server
+#    container_name: eureka-server
+#    ports:
+#      - "8761:8761"
+#    environment:
+#      - SPRING_PROFILES_ACTIVE=docker
+#    networks:
+#      - spring
+#    depends_on:
+#      - zipkin
+#  apigw:
+#    image: arthurspectr/api-gateway
+#    container_name: apigw
+#    ports:
+#      - "8083:8083"
+#    environment:
+#      - SPRING_PROFILES_ACTIVE=docker
+#    networks:
+#      - spring
+#    depends_on:
+#      - zipkin
+#      - eureka-server
   customer:
     image: arthurspectr/customer
     container_name: customer
@@ -77,8 +77,8 @@ services:
       - zipkin
       - postgres
       - rabbitmq
-      - eureka-server
-      - apigw
+#      - eureka-server
+#      - apigw
   fraud:
     image: arthurspectr/fraud
     container_name: fraud
@@ -93,9 +93,9 @@ services:
       - zipkin
       - postgres
       - rabbitmq
-      - eureka-server
-      - apigw
-      - customer
+#      - eureka-server
+#      - apigw
+#      - customer
   notification:
     image: arthurspectr/notification
     container_name: notification
@@ -110,10 +110,10 @@ services:
       - zipkin
       - postgres
       - rabbitmq
-      - eureka-server
-      - apigw
-      - customer
-      - fraud
+#      - eureka-server
+#      - apigw
+#      - customer
+#      - fraud
 
 networks:
   postgres:
